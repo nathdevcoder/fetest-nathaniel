@@ -2,22 +2,7 @@ import { newAppointment  } from "@/data/timeSlot";
 import style from "./Time.module.scss"
 import Link from "next/link";
 import Image from "next/image";
-
-type AppointmentType = {
-    top: number, 
-    bottom: number
-    detail: {
-        type: 'meeting' | 'others'
-        title: string
-        start: string
-        end: string
-        accounts: {
-            name: string
-            id: string
-        }[]
-    }
-}
-
+ 
 const AppointmentCard = ({top, bottom, detail}: AppointmentType) => { 
     return (
       <div className={style.TimeCard} style={{ bottom , top  }}>

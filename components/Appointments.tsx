@@ -10,10 +10,13 @@ export default function Appointments() {
         currentDate, 
         currentMonth,
         currentDayOfWeek,
-        currentYear
+        currentYear,
+        isLoading,
+        data
     } = useDayNexter()
 
   return (
+    <> 
     <div className={style.Appointment}>
         <div className={style.AppointmentLeft}>
             <p>Appointment</p>
@@ -31,8 +34,9 @@ export default function Appointments() {
             <p>Today is {currentDayOfWeek}, {currentMonth} {currentDate}, {currentYear} </p>
         </div>
         <div className={style.AppointmentRight}>
-            <button>New Appointment</button>
+            <button disabled={isLoading}>New Appointment</button>
         </div>
     </div>
+    </>
   )
 }

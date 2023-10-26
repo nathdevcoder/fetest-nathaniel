@@ -1,0 +1,55 @@
+@use '../styles/mixins' as mx;
+@use '../styles/variables' as vr;
+
+.Appointment {
+    padding: 20px 40px;
+    @include mx.Row(space-between);
+    border-bottom: 1px solid vr.$bordercolor;
+    &Left p {
+        color: #9D9C9C; 
+        font-family: Urbanist;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.32px;
+    }
+    &Right button {
+        padding: 12px 20px;
+        color: #FFF; 
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.32px;
+        border-radius: 12px;
+        background: vr.$primary;
+        border: none;
+        cursor: pointer;
+    }
+    &NexterUI {
+        @include mx.Row(flex-start);
+        column-gap: 12px; 
+        margin: 12px 0;
+        & p {
+            color: #1C1C1E; 
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.48px;
+        }
+        & div {
+            @include mx.Row;
+            column-gap: 12px; 
+            & button {
+                border: none; 
+                padding: 10px;
+                background: vr.$backgoundprimarylight;
+                border-radius: 100px;
+                cursor: pointer;
+                @include mx.Row; 
+            }
+        }
+    }
+}

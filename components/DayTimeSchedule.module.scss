@@ -1,0 +1,21 @@
+@use '../styles/mixins' as mx;
+@use '../styles/variables' as vr;
+
+.Time {
+    height: 100%;
+    overflow-y: scroll;
+    &Table {
+        position: relative;
+    }
+    &Slot {
+        border-bottom: .5px solid vr.$bordercolor;
+        border-top: .5px solid vr.$bordercolor;
+        box-sizing: border-box;
+        & div:first-child {
+            width: 140px;
+            height: 98px;
+            border-right: .5px solid vr.$bordercolor;
+            @include mx.Row;
+        }
+    }
+}

@@ -20,6 +20,7 @@ $sidebaractivewidth: 240px;
     position: fixed;
     background: vr.$backgoundprimary;
     height: 100vh;
+    z-index: 10;
     &Active {
         @extend .SideBar;
         width: $sidebaractivewidth;
@@ -33,7 +34,7 @@ $sidebaractivewidth: 240px;
         background:  vr.$backgoundprimarydark;
         padding: 8px;
         border: none;
-        border-radius: 8px;
+        border-radius: 8px; 
     }
     // Header
     &Logo {

@@ -1,0 +1,45 @@
+@use '../../styles/variables' as vr;
+@use '../../styles/mixins' as mx;
+
+.TimeCard {
+    position: absolute;
+    left: 160px;
+    border: 1px solid red;
+    width: calc(100% - 180px);
+    padding: 20px;
+    background: vr.$secondarydark;
+    border: 1px solid vr.$secondary;
+    border-radius: 12px;
+    min-height: 129px;
+    @include mx.Row(flex-start, flex-start);
+    column-gap: 12px;
+    & .Vicon {
+        padding: 10px;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.80) 100%), #9747FF;
+        border-radius: 100px;
+    }
+    & .Oicon {
+        padding: 10px;
+        background: vr.$primarylight;
+    }
+    &Accounts {
+        @include mx.Row(flex-start); 
+        column-gap: 4px;
+        margin-top: 12px;
+    }
+    & h5 {
+        color: vr.$paragaprimary; 
+        font-size: 16px; 
+        font-weight: 700; 
+        letter-spacing: 0.32px;
+        line-height: normal;
+        margin-bottom: 8px;
+    }
+    & p, & a {
+        color: vr.$paragaprimary;  
+        font-size: 12px; 
+        font-weight: 500; 
+        letter-spacing: 0.24px;
+        line-height: normal;
+    }
+}

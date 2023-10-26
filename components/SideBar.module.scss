@@ -1,0 +1,74 @@
+@use '../styles/variables' as vr;
+@use '../styles/mixins' as mx;
+
+$sidebarwidth: 120px;
+$sidebaractivewidth: 240px; 
+
+.SideBar {
+    &Space {
+        width: $sidebarwidth;
+        transition: all 300ms;
+        &Active {
+            width: $sidebaractivewidth;
+            transition: all 300ms;
+        }
+    }
+    display: flex;
+    flex-direction: column;
+    transition: all 300ms;
+    width: $sidebarwidth;
+    position: fixed;
+    background: vr.$backgoundprimary;
+    height: 100vh;
+    &Active {
+        @extend .SideBar;
+        width: $sidebaractivewidth;
+    }
+    &Btn {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        cursor: pointer;
+        transform: translate(50%, -50%);
+        background:  vr.$backgoundprimarylight;
+        padding: 8px;
+        border: none;
+        border-radius: 8px;
+    }
+    // Header
+    &Logo {
+        padding: 40px 15px;
+        border-bottom: 2px solid gray;
+        display: flex;
+        justify-content:center ;
+        align-items: center;
+        transition: all 300ms;
+    }
+    // Body
+    &Links {
+        padding: 40px 0; 
+        display: flex;
+        justify-content:center ;
+        align-items: center;
+        flex-direction: column;
+    }
+    // Footer
+    &Footer {
+        margin-top: auto;
+        border-top: 2px  solid gray;
+        padding: 40px 15px;
+        @include mx.Row;
+        & div{
+            @include mx.Col;
+            row-gap: 12px;
+        }
+        & p {
+            color: vr.$paragsecondary; 
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: 0.24px;
+        }
+    }
+}

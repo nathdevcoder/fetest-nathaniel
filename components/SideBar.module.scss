@@ -30,7 +30,7 @@ $sidebaractivewidth: 240px;
         top: 50%;
         cursor: pointer;
         transform: translate(50%, -50%);
-        background:  vr.$backgoundprimarylight;
+        background:  vr.$backgoundprimarydark;
         padding: 8px;
         border: none;
         border-radius: 8px;
@@ -38,7 +38,7 @@ $sidebaractivewidth: 240px;
     // Header
     &Logo {
         padding: 40px 15px;
-        border-bottom: 2px solid gray;
+        border-bottom: 1px solid gray;
         display: flex;
         justify-content:center ;
         align-items: center;
@@ -55,7 +55,7 @@ $sidebaractivewidth: 240px;
     // Footer
     &Footer {
         margin-top: auto;
-        border-top: 2px  solid gray;
+        border-top: 1px  solid gray;
         padding: 40px 15px;
         @include mx.Row;
         & div{

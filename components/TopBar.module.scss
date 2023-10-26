@@ -1,0 +1,58 @@
+@use '../styles/mixins' as mx;
+@use '../styles/variables' as vr;
+
+.Topbar {
+    padding: 40px;
+    @include mx.Row;
+    column-gap: 40px;
+    border-bottom: 1px solid vr.$bordercolor;
+    &Search {
+        position: relative;
+        width: 100%;
+        flex-grow: 1;
+        & input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            background: vr.$backgoundprimarylight;
+            border-radius: 12px;
+            color: vr.$paragsecondary;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: 0.32px;
+        }
+        & button {
+            position: absolute;
+            right: 0;
+            height: 100%;
+            aspect-ratio: 1;
+            border: none;
+            background: none;
+        }
+    }
+    &Settings {
+        @include mx.Row;   
+        column-gap: 12px;
+        & .account {
+            @include mx.Row;
+            width: 100px; 
+            & p {
+                color: #1C1C1E;  
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 0.32px;
+            } 
+        }
+        & button {
+            padding: 10px;
+            background: vr.$backgoundprimarylight;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer; 
+        }
+    }
+}

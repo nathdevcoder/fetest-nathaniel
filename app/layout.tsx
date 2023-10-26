@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Urbanist } from 'next/font/google'
 import '@styles/Styler.scss'
 import SideBar from '@/components/SideBar'
+import TopBar from '@/components/TopBar'
 
 const urbanist = Urbanist({ subsets: ['latin'] })
 
@@ -20,7 +21,10 @@ export default function RootLayout({
       <body className={urbanist.className}>
         <div className='Layout'>
           <SideBar/>  
-          {children}
+          <main>
+            <TopBar />
+            {children}
+          </main>
         </div>      
       </body>
     </html>

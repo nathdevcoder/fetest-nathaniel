@@ -25,7 +25,7 @@ export default function useDayNexter() {
         (async ()=>{
             try {
                 setIsLoading(true)
-                const identifier = currentDay.format('YYYYMMDD');
+                const identifier = currentDay.format('YYYYMMDD'); 
                 const response = await fetch(`/api/schedule/${identifier}`, { signal })
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -50,7 +50,7 @@ export default function useDayNexter() {
             abortController.abort();
         }
     }, [currentDay]) 
-    
+
     return  {
         nextDay: handleNextDay, 
         previousDay: handlePreviousDay, 
@@ -59,6 +59,7 @@ export default function useDayNexter() {
         currentDayOfWeek, 
         currentYear,
         data,
-        isLoading
+        isLoading,
+        identifier: currentDay.format('YYYYMMDD')
     }
 }

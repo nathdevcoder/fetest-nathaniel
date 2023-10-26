@@ -5,6 +5,8 @@ import useTextInput from './snippets/useTextInput'
 import Vets from '@/data/veterinary'
 
 export default function useFetcher() {
+    const [start, setStart] = useState('00:00')
+    const [end, setEnd] = useState('23:00')
     const [breed, setBreed] = useTextInput('must not empty')
     const [age, setAge] = useTextInput('must not empty')
     const [name, setName] = useTextInput('must not empty')
@@ -13,6 +15,7 @@ export default function useFetcher() {
     const [email, setEmail] = useTextInput('must not empty')
     const [address, setAddress] = useTextInput('must not empty')
     const [gender, setGender] = useState<'Male' | 'Female'>('Male')
+    const [type, setType] = useState<'Consultation' | 'Vacination'>('Consultation')
     const [pet, setPet] = useState<'Dog' | 'Cat'>('Dog')
     const [vet, setVet] = useState<'anika' | 'danika' | 'john' >('john')
     const vetDetail = Vets[vet]
@@ -33,11 +36,11 @@ export default function useFetcher() {
         } else return false
     }
 
-    async function Post(id: string) {
+    async function Post(id: string, onSuccess?: () => void, onError?: ()=>void) {
         if(notValid()) return
         try {
             setLoading(true)  
-            fetch(`/api/schedule`, {
+            const res = await fetch(`/api/schedule`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -55,12 +58,22 @@ export default function useFetcher() {
                         pet: pet ,
                         gender: gender ,
                         vet: vet,
-                        vetDetail: vetDetail 
+                        vetDetail: vetDetail,
+                        start,
+                        end,
+                        type
                     }
                 })
             })
+            if(res.ok) {
+                alert('appointment save')
+                if(onSuccess) onSuccess()
+            }
         } catch (error) {
-            console.log(error); 
+            alert('oops something went wrong') 
+            if(onError) onError() 
+        } finally {
+            setLoading(false)  
         }
     }
     
@@ -87,7 +100,12 @@ export default function useFetcher() {
     setVet,
     vetDetail,
     loading,
-    Post
-
+    Post,
+    start,
+    setStart,
+    end,
+    setEnd,
+    type,
+    setType
   }
 }

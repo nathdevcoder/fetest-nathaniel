@@ -1,0 +1,74 @@
+@use '../styles/mixins' as mx;
+@use '../styles/variables' as vr;
+
+.Modal {
+    display: none;
+    &Active {
+        display: block;
+        z-index: 100;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+     
+    }
+    &Content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 800px;
+        width: 100%;
+        min-height: 500px; 
+        background: white;
+        padding: 20px;
+    }
+    &Body {
+        @include mx.Row(flex-start, flex-start);
+        & > div {
+            width: 100%;
+        } 
+    }  
+}
+.Selects {
+    width: 100%;
+    @include mx.Row;
+    column-gap: 12px;
+    & select {
+        width: 100%;
+        padding: 8px;
+        margin: 12px;
+    }
+}
+
+.TimeInputs {
+    width: 100%;
+    @include mx.Row;
+    column-gap: 12px;
+    & input {
+        width: 100%;
+        padding: 8px;
+        margin: 12px;
+    }
+}
+.Actions {
+    width: 100%;
+    @include mx.Row(flex-end);
+    column-gap: 12px;
+    & button { 
+        padding: 12px 20px;
+        margin: 20px;
+        background: vr.$primary;
+        border: none;
+        color: white;
+        width: 200px;
+        border-radius: 12px;
+    }
+}
+.Detail {
+    width: 100%;
+    padding: 8px;
+    margin: 12px;
+}

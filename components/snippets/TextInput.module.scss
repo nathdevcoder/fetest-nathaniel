@@ -1,0 +1,19 @@
+@use '../../styles/mixins' as mx;
+@use '../../styles/variables' as vr;
+
+.TextInput { 
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 8px;
+    &Wrapper {
+        @include mx.Col(flex-start, flex-start); 
+        margin: 12px;
+        row-gap: 4px;
+    }
+    &Error {
+        @extend .TextInput;
+        background: pink;
+        border: 1px solid  vr.$error;
+    }
+}

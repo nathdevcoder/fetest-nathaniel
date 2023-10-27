@@ -19,6 +19,7 @@ export default function DayTimeSchedule({appointments}: dataType) {
             ))}
             {appointments.map(ap=>(
               <AppointmentCard 
+                key={ap.id}
                 top={ap.top} 
                 bottom={ap.bottom} 
                 detail={{

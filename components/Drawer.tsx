@@ -9,13 +9,15 @@ import CardActions from './snippets/CardActions'
 type DrawerType = {
     onClose: () => void
     appointment: singleAppointmentType | null
+    loading: boolean
 }
 
-export default function Drawer({onClose, appointment}:DrawerType) {
+export default function Drawer({onClose, appointment, loading}:DrawerType) {
   return (
     <div className={style.Drawer}>
         <button onClick={onClose} className={style.close}><Image src={'/CloseRounded.svg'} alt="Logo" width={24} height={24} /></button>
-        { appointment ?  ( <>
+        { loading ? <div className={style.DrawerPaper}>Loading</div>
+        : appointment ?  ( <>
             <div className={style.DrawerPaper}>
                 <CardHeader avatar='https://randomuser.me/api/portraits/men/2.jpg' title={appointment.owner} subtitle='client' lg/>
             </div>
@@ -23,8 +25,8 @@ export default function Drawer({onClose, appointment}:DrawerType) {
                 <CardDetail email={appointment.email} phone={appointment.phone} address={appointment.address} heading='CONTACT INFORMATION' />
             </div>
             <div className={style.DrawerPaper}>
-                <CardHeader avatar='https://randomuser.me/api/portraits/men/1.jpg' title={appointment.vetdetail?.building} subtitle='Los Angeles' header='CLINIC DETAILS'/>
-                <CardDetail email={appointment.email} phone={appointment.vetdetail?.contact_number} address='somewhere around the world'/>
+                <CardHeader avatar='https://randomuser.me/api/portraits/men/1.jpg' title={appointment.vetDetail?.building} subtitle='Los Angeles' header='CLINIC DETAILS'/>
+                <CardDetail email={appointment.email} phone={appointment.vetDetail?.contact_number} address='somewhere around the world'/>
             </div>
             <div className={style.DrawerPaper}>
                 <CardHeader avatar='https://randomuser.me/api/portraits/men/1.jpg' title={appointment.name} subtitle={appointment.pet} header='PET DETAILS'/>

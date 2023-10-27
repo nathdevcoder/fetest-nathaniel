@@ -38,7 +38,7 @@ type appointmentRespondType = {
     start: string
     type: "Consultation" | "Vacination"
     vet: 'anika' | 'danika' | 'john' 
-    vetdetail: {
+    vetDetail: {
         address: string
         building: string
         contact_number: string

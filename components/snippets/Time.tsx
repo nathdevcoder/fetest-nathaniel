@@ -1,9 +1,12 @@
-import { newAppointment  } from "@/data/timeSlot"; 
-import style from "./Time.module.scss"
-import Link from "next/link";
-import Image from "next/image";
  
-const AppointmentCard = ({top, bottom, detail}: AppointmentType) => { 
+import style from "./Time.module.scss" 
+import Image from "next/image";
+
+type AppointmentCardType = AppointmentType & {
+    openDetail: (id:string) => void
+}
+ 
+const AppointmentCard = ({top, bottom, detail, openDetail}: AppointmentCardType) => { 
     return (
       <div className={ detail.type === 'Consultation' ? style.TimeCardConsultaion : style.TimeCardVacination} style={{ bottom , top  }}>
         <div className={detail.type === 'Consultation' ?  style.Vicon : style.Oicon }>
@@ -25,7 +28,7 @@ const AppointmentCard = ({top, bottom, detail}: AppointmentType) => {
                 height={16}
                 priority
             />
-                {detail.accounts.map(ac=> ( <Link key={ac.id} href={ac.id}>{ac.name}</Link> ))}
+                {detail.accounts.map(ac=> ( <button key={ac.id} onClick={()=>openDetail(ac.id)}>{ac.name}</button> ))}
             </div>
         </div>
       </div>

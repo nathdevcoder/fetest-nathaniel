@@ -1,0 +1,79 @@
+@use '../../styles/mixins' as mx;
+@use '../../styles/variables' as vr;
+
+.Card {
+    &Header {
+        & > div {
+            @include mx.Row(flex-start);
+            column-gap: 24px;
+        }
+        & h5 {
+            color: vr.$backgoundprimary; 
+            @include mx.TextContent(700, 24px, 0.48px);
+        }
+        & h4 {
+            color: vr.$backgoundprimary; 
+            @include mx.TextContent(700, 16px, 0.32px); 
+        }
+        & h6 {
+            color: vr.$paragsecondary; 
+            @include mx.TextContent(800, 14px, 0.28px); 
+            margin-bottom: 20px;
+        }
+        & p {
+            color: vr.$paragsecondary; 
+            @include mx.TextContent(500, 16px, 0.32px);  
+        }
+        & img {
+            border-radius: 100px;
+            overflow: hidden;
+        }
+    }
+    &Detail {
+        & h6 {
+            color: vr.$paragsecondary; 
+            @include mx.TextContent(800, 14px, 0.28px); 
+            margin-bottom: 20px;
+        }
+        & > div {
+            @include mx.Row(flex-start, flex-start);
+            column-gap: 20px;
+            margin:20px 0 ;
+            & > div {
+                @include mx.Row(flex-start);
+                column-gap: 8px;
+                width: max-content;
+            }
+        }
+        & span {
+            width: 70px;
+            color: vr.$paragsecondary;
+            @include mx.TextContent(500, 16px, 0.32px); 
+            display: inline-block;
+        }
+        & p {
+            color: vr.$backgoundprimary; 
+            @include mx.TextContent(500, 16px, 0.32px);  
+        }
+    }
+    &Actions {
+        @include mx.Col;
+        row-gap: 20px;
+        & button {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            @include mx.TextContent(500, 16px, 0.32px);   
+            &:first-child {
+                color: white;
+                background: vr.$primary;
+            }
+            &:last-child {
+                background: white;
+                color: vr.$paragsecondary;
+                border: 1px solid vr.$paragsecondary;
+            }
+        }
+    }
+}

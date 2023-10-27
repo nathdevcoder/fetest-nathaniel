@@ -27,3 +27,10 @@
     margin: $h auto ;
 }
 
+@mixin TextContent($w, $s, $ls) {
+    font-size: $s;
+    font-style: normal;
+    font-weight: $w;
+    line-height: normal;
+    letter-spacing: $ls;
+}

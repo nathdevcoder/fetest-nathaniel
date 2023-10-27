@@ -1,0 +1,18 @@
+@use '../styles/variables' as vr;
+.Drawer {
+    width: 400px;
+    position: relative;
+    & .close {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    &Paper {
+        border: 1px solid vr.$bordercolor;
+        border-top: none;
+        padding: 20px 40px;
+    }
+}

@@ -5,9 +5,10 @@ import AppointmentCard from './snippets/Time'
 
 type dataType = {
   appointments:  appointmentRespondType
+  openDetail: (id:string) => void
 }
 
-export default function DayTimeSchedule({appointments}: dataType) {
+export default function DayTimeSchedule({appointments, openDetail}: dataType) {
   return (
     <div className={style.Time}>
         <div className={style.TimeTable}>
@@ -20,6 +21,7 @@ export default function DayTimeSchedule({appointments}: dataType) {
             {appointments.map(ap=>(
               <AppointmentCard 
                 key={ap.id}
+                openDetail={openDetail}
                 top={ap.top} 
                 bottom={ap.bottom} 
                 detail={{

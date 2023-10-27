@@ -36,7 +36,7 @@ export default function useFetcher() {
         } else return false
     }
 
-    async function Post(id: string, onSuccess?: () => void, onError?: ()=>void) {
+    async function Post(id: string, onSuccess?: () => Promise<void>, onError?: ()=>void) {
         if(notValid()) return
         try {
             setLoading(true)  
@@ -69,7 +69,7 @@ export default function useFetcher() {
             const result = await res.json() as {success: boolean, message: string}
             if(result.success) {
                 alert(result.message || 'appointment saved')  
-                if(onSuccess) onSuccess()
+                if(onSuccess) await onSuccess()
             } else {
                 alert(result.message || 'appointment not saved')  
                 if(onError) onError()  

@@ -22,34 +22,36 @@ export default function useDayNexter() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        (async ()=>{
-            try {
-                setIsLoading(true)
-                const identifier = currentDay.format('YYYYMMDD'); 
-                const response = await fetch(`/api/schedule/${identifier}`, { signal })
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const result = await response.json() as { success: boolean;  message: string; data: appointmentRespondType; }
-                if(result.success) {
-                    setData(result.data); 
-                }
-            } catch (error: any) {
-                if (error.name === 'AbortError') {
-                    console.log('Request was aborted');
-                } else {
-                    console.error('Error fetching data:', error);
-                }
-                setData([]); 
-            } finally {
-                setIsLoading(false);
-            }
-        })()
+        reFetch(signal)
 
         return () => { 
             abortController.abort();
         }
     }, [currentDay]) 
+
+    async function reFetch(signal?: AbortSignal | null | undefined) {
+        try {
+            setIsLoading(true)
+            const identifier = currentDay.format('YYYYMMDD'); 
+            const response = await fetch(`/api/schedule/${identifier}` ,{signal})
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const result = await response.json() as { success: boolean;  message: string; data: appointmentRespondType; }
+            if(result.success) {
+                setData(result.data); 
+            }
+        } catch (error: any) {  
+            if (error.name === 'AbortError') {
+                console.log('Request was aborted');
+            } else {
+                console.error('Error fetching data:', error);
+            }
+            setData([]); 
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     return  {
         nextDay: handleNextDay, 
@@ -60,6 +62,7 @@ export default function useDayNexter() {
         currentYear,
         data,
         isLoading,
-        identifier: currentDay.format('YYYYMMDD')
+        identifier: currentDay.format('YYYYMMDD'),
+        reFetch
     }
 }

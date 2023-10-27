@@ -18,11 +18,12 @@ export default function Home() {
       currentYear,
       isLoading,
       data,
-      identifier
+      identifier,
+      reFetch
   } = useDayNexter()
   return (
     <div className={styles.main}> 
-      <Modal open={open} setOpen={setOpen} id={identifier} today={`${currentMonth} ${currentDate}, ${currentYear}`}/> 
+      <Modal open={open} setOpen={setOpen} id={identifier} today={`${currentMonth} ${currentDate}, ${currentYear}`} reFetch={reFetch}/> 
       <Appointments 
         date={`Today is ${currentDayOfWeek}, ${currentMonth} ${currentDate}, ${currentYear}`} 
         month={currentMonth}

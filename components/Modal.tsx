@@ -9,9 +9,10 @@ type modalType = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   id: string
   today: string
+  reFetch: ()=>Promise<void>
 }
 
-export default function Modal({open, setOpen, id, today}: modalType) { 
+export default function Modal({open, setOpen, id, today, reFetch}: modalType) { 
     const {
       breed,
       setBreed,
@@ -43,6 +44,12 @@ export default function Modal({open, setOpen, id, today}: modalType) {
       type,
       setType
     } = useFetcher()
+
+    async function onSuccess() {
+      await reFetch()
+      setOpen(false)
+    }
+
   return (
     <div className={open? style.ModalActive : style.Modal} onClick={(e)=>{
         if(e.target == e.currentTarget) setOpen(false)
@@ -95,7 +102,7 @@ export default function Modal({open, setOpen, id, today}: modalType) {
           <p>{vetDetail.veterinary_name}</p>
         </div>
         <div className={style.Actions}>
-          <button onClick={()=>Post(id, ()=>setOpen(false), ()=>setOpen(false))} disabled={loading}>
+          <button onClick={()=>Post(id, onSuccess, ()=>setOpen(false))} disabled={loading}>
             Post
           </button>
           <button onClick={()=>setOpen(false)} >

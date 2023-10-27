@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 export default function useDayNexter() {
     const [currentDay, setCurrentDay] = useState(dayjs());
-    const [data, setData] = useState<AppointmentType[]>([]);
+    const [data, setData] = useState<appointmentRespondType>([]);
     const [isLoading, setIsLoading] = useState(false);
     const currentMonth = currentDay.format('MMMM');  
     const currentDate = currentDay.format('DD');
@@ -30,18 +30,18 @@ export default function useDayNexter() {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                const result = await response.json();
-                setData(result);
-                setIsLoading(false);
-                console.log(result);
-                
+                const result = await response.json() as { success: boolean;  message: string; data: appointmentRespondType; }
+                if(result.success) {
+                    setData(result.data); 
+                }
             } catch (error: any) {
                 if (error.name === 'AbortError') {
                     console.log('Request was aborted');
                 } else {
                     console.error('Error fetching data:', error);
                 }
-                setData([]);
+                setData([]); 
+            } finally {
                 setIsLoading(false);
             }
         })()

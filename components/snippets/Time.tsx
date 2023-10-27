@@ -5,10 +5,10 @@ import Image from "next/image";
  
 const AppointmentCard = ({top, bottom, detail}: AppointmentType) => { 
     return (
-      <div className={style.TimeCard} style={{ bottom , top  }}>
-        <div className={detail.type === 'meeting' ?  style.Vicon : style.Oicon }>
+      <div className={ detail.type === 'Consultation' ? style.TimeCardConsultaion : style.TimeCardVacination} style={{ bottom , top  }}>
+        <div className={detail.type === 'Consultation' ?  style.Vicon : style.Oicon }>
             <Image 
-            src={detail.type === 'meeting' ? '/consultation.svg' : '/injection.svg'}
+            src={detail.type === 'Consultation' ? '/consultation.svg' : '/injection.svg'}
             alt="Logo"
             width={20}
             height={20} 
@@ -19,7 +19,7 @@ const AppointmentCard = ({top, bottom, detail}: AppointmentType) => {
             <p>{detail.start} - { detail.end }</p>
             <div className={style.TimeCardAccounts}>
             <Image 
-                src={detail.type === 'meeting' ? '/vuser.svg' : '/ouser.svg'}
+                src={detail.type === 'Consultation' ? '/vuser.svg' : '/ouser.svg'}
                 alt="Logo"
                 width={16}
                 height={16}

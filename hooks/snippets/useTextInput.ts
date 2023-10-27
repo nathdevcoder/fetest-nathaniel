@@ -13,7 +13,7 @@ export default function useTextInput(msg:string): [dataType, setDataType, setdat
     function SetData(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const val = e.target.value
         if(val) setData({val, msg:"", notvalid: false})
-        else setData({val:'', msg: 'Name Required', notvalid: true})
+        else setData({val:'', msg: msg, notvalid: true})
     }
   return [ data, SetData, setData]
 }

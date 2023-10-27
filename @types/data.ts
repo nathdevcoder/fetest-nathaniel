@@ -2,7 +2,7 @@ type AppointmentType = {
     top: number, 
     bottom: number
     detail: {
-        type: 'meeting' | 'others'
+        type: 'Consultation' | 'Vacination'
         title: string
         start: string
         end: string
@@ -12,3 +12,12 @@ type AppointmentType = {
         }[]
     }
 }
+type appointmentRespondType = {
+    title: "Consultation" | "Vacination"
+    id: string
+    start: string
+    end: string
+    top: number
+    bottom: number
+    name: string
+  }[]

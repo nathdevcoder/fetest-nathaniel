@@ -1,8 +1,9 @@
+import { PostApointment } from '@/database/appointment'
 import { NextRequest, NextResponse } from 'next/server' 
 
 export async function POST(request: NextRequest)  {   
     const body = await request.json()  
-    console.log(body);
-    
-  return NextResponse.json(body)
+    if(!body.id && ! body.data ) return NextResponse.json({ success: false, message: 'no data provided' })
+    const res = await PostApointment(body.id, body.data) 
+  return NextResponse.json(res)
   }

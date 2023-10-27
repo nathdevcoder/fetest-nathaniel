@@ -14,9 +14,12 @@ $bordercolor: #D8D3CC;
 
 $primary: #FF630B;
 $primarydark: linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%), #FF630B;
+$primarybglight: linear-gradient(0deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.90) 100%), #FF9447; 
+
 $primarylight: #FFE0CE;
 $secondary: #9747FF;  
 $secondarydark: linear-gradient(0deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.90) 100%), #9747FF; 
+$secondarybglight: linear-gradient(0deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.80) 100%), #9747FF;
 
 $paragaprimary: #1C1C1E;
 $paragsecondary: #9D9C9C;

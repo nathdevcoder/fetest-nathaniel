@@ -7,13 +7,13 @@ import Vets from '@/data/veterinary'
 export default function useFetcher() {
     const [start, setStart] = useState('00:00')
     const [end, setEnd] = useState('23:00')
-    const [breed, setBreed] = useTextInput('must not empty')
-    const [age, setAge] = useTextInput('must not empty')
-    const [name, setName] = useTextInput('must not empty')
-    const [owner, setOwner] = useTextInput('must not empty')
-    const [phone, setPhone] = useTextInput('must not empty')
-    const [email, setEmail] = useTextInput('must not empty')
-    const [address, setAddress] = useTextInput('must not empty')
+    const [breed, setBreed] = useTextInput('pet breed field is required')
+    const [age, setAge] = useTextInput('pet age field is required')
+    const [name, setName] = useTextInput('pet name field is required')
+    const [owner, setOwner] = useTextInput('owner name field is required')
+    const [phone, setPhone] = useTextInput('phone number field is required')
+    const [email, setEmail] = useTextInput('email fielf is required')
+    const [address, setAddress] = useTextInput('address field is required')
     const [gender, setGender] = useState<'Male' | 'Female'>('Male')
     const [type, setType] = useState<'Consultation' | 'Vacination'>('Consultation')
     const [pet, setPet] = useState<'Dog' | 'Cat'>('Dog')
@@ -65,9 +65,14 @@ export default function useFetcher() {
                     }
                 })
             })
-            if(res.ok) {
-                alert('appointment save')
+            if(!res.ok) throw Error('oops something went wrong')
+            const result = await res.json() as {success: boolean, message: string}
+            if(result.success) {
+                alert(result.message || 'appointment saved')  
                 if(onSuccess) onSuccess()
+            } else {
+                alert(result.message || 'appointment not saved')  
+                if(onError) onError()  
             }
         } catch (error) {
             alert('oops something went wrong') 

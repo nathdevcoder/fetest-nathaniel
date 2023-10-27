@@ -6,18 +6,29 @@ export default function useDayNexter() {
     const [currentDay, setCurrentDay] = useState(dayjs());
     const [data, setData] = useState<appointmentRespondType>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [drawer, setDrawer] = useState({open: false, id: ''}) 
+    const [appointment, setAppointment] = useState<singleAppointmentType | null>(null)
+
     const currentMonth = currentDay.format('MMMM');  
     const currentDate = currentDay.format('DD');
     const currentDayOfWeek = currentDay.format('dddd');  
     const currentYear = currentDay.year();
+    const identifier = currentDay.format('YYYYMMDD')
 
     const handleNextDay = () => {
       setCurrentDay(currentDay.add(1, 'day'));
     };
-  
     const handlePreviousDay = () => {
       setCurrentDay(currentDay.subtract(1, 'day'));
     };
+    function onOpenDrawer(id: string) {
+        setDrawer({open: true, id})
+    }
+    function onCloseDrawer( ) {
+      setDrawer({open: false, id:""})
+    }
+
+
     useEffect(()=>{
         const abortController = new AbortController();
         const signal = abortController.signal;
@@ -29,10 +40,14 @@ export default function useDayNexter() {
         }
     }, [currentDay]) 
 
+    useEffect(()=>{
+        if(!drawer.id) return 
+        FetchAppointment()
+    }, [drawer])
+
     async function reFetch(signal?: AbortSignal | null | undefined) {
         try {
-            setIsLoading(true)
-            const identifier = currentDay.format('YYYYMMDD'); 
+            setIsLoading(true) 
             const response = await fetch(`/api/schedule/${identifier}` ,{signal})
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -53,6 +68,24 @@ export default function useDayNexter() {
         }
     }
 
+    async function FetchAppointment() {
+        try {
+            if(!drawer.id) return 
+            setIsLoading(true)
+            const response = await fetch(`/api/schedule?day=${identifier}&&key=${drawer.id}`)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            } 
+            const result = await response.json() as { success: boolean;  message: string; data: singleAppointmentType; }
+            if(result.success) setAppointment(result.data) 
+        } catch (error) {
+            setAppointment(null)
+            console.error('Error fetching data:', error);
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     return  {
         nextDay: handleNextDay, 
         previousDay: handlePreviousDay, 
@@ -62,7 +95,12 @@ export default function useDayNexter() {
         currentYear,
         data,
         isLoading,
-        identifier: currentDay.format('YYYYMMDD'),
-        reFetch
+        identifier ,
+        reFetch,
+        onOpenDrawer,
+        onCloseDrawer,
+        FetchAppointment,
+        appointment,
+        drawer
     }
 }

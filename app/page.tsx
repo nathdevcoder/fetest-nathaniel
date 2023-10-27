@@ -6,11 +6,10 @@ import DayTimeSchedule from '@/components/DayTimeSchedule'
 import Drawer from '@/components/Drawer'
 import Modal from '@/components/Modal'
 import useDayNexter from '@/hooks/useDayNexter'
-import { useState, Fragment } from 'react'
+import { useState } from 'react'
 
 export default function Home() {
-  const [open, setOpen] = useState(false)
-  const [drawer, setDrawer] = useState({open: false, id: ''})
+  const [open, setOpen] = useState(false) 
   const { 
       previousDay, 
       nextDay, 
@@ -21,15 +20,16 @@ export default function Home() {
       isLoading,
       data,
       identifier,
-      reFetch
+      reFetch,
+      onCloseDrawer,
+      onOpenDrawer,
+      FetchAppointment,
+      appointment,
+      drawer
   } = useDayNexter()
 
-  function onOpenDrawer(id: string) {
-      setDrawer({open: true, id})
-  }
-  function onCloseDrawer( ) {
-    setDrawer({open: false, id:""})
-  }
+  
+
 
   return (
     <div className={styles.body}> 

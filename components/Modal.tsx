@@ -41,12 +41,14 @@ export default function Modal({open, setOpen, id, today, reFetch}: modalType) {
       setStart,
       end,
       setEnd,
+      reset,
       type,
       setType
     } = useFetcher()
 
     async function onSuccess() {
       await reFetch()
+      reset()
       setOpen(false)
     }
 
@@ -85,7 +87,7 @@ export default function Modal({open, setOpen, id, today, reFetch}: modalType) {
           <input type="time" min={start} value={end} onChange={(e)=>setEnd(e.target.value)}/>
         </div>
         <div className={style.Selects}>
-          <select name="type" id="type" value={pet} onChange={(e)=> setType(e.target.value as "Consultation"|"Vacination")}>
+          <select name="type" id="type" value={type} onChange={(e)=> setType(e.target.value as "Consultation"|"Vacination")}>
                 <option value="Consultation">Consultation</option>
                 <option value="Vacination">Vacination</option>
               </select>

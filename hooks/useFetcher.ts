@@ -1,19 +1,19 @@
 
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import useTextInput from './snippets/useTextInput'
 import Vets from '@/data/veterinary'
 
 export default function useFetcher() {
     const [start, setStart] = useState('00:00')
     const [end, setEnd] = useState('23:00')
-    const [breed, setBreed] = useTextInput('pet breed field is required')
-    const [age, setAge] = useTextInput('pet age field is required')
-    const [name, setName] = useTextInput('pet name field is required')
-    const [owner, setOwner] = useTextInput('owner name field is required')
-    const [phone, setPhone] = useTextInput('phone number field is required')
-    const [email, setEmail] = useTextInput('email fielf is required')
-    const [address, setAddress] = useTextInput('address field is required')
+    const [breed, setBreed, resetbreed] = useTextInput('pet breed field is required')
+    const [age, setAge, resetage] = useTextInput('pet age field is required')
+    const [name, setName, resetname] = useTextInput('pet name field is required')
+    const [owner, setOwner, resetowner] = useTextInput('owner name field is required')
+    const [phone, setPhone, resetphone] = useTextInput('phone number field is required')
+    const [email, setEmail, resetemail] = useTextInput('email fielf is required')
+    const [address, setAddress, resetaddress] = useTextInput('address field is required')
     const [gender, setGender] = useState<'Male' | 'Female'>('Male')
     const [type, setType] = useState<'Consultation' | 'Vacination'>('Consultation')
     const [pet, setPet] = useState<'Dog' | 'Cat'>('Dog')
@@ -81,6 +81,16 @@ export default function useFetcher() {
             setLoading(false)  
         }
     }
+
+    function reset() {
+        resetbreed()
+        resetage()
+        resetemail()
+        resetowner()
+        resetaddress()
+        resetname()
+        resetphone()
+    }
     
   return {
     breed,
@@ -111,6 +121,7 @@ export default function useFetcher() {
     end,
     setEnd,
     type,
-    setType
+    setType,
+    reset
   }
 }

@@ -24,7 +24,7 @@ type appointmentRespondType = {
 
   type singleAppointmentType = {
     address: string
-    age: number
+    age: string
     bottom: number
     top: number
     breed: string

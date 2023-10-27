@@ -4,7 +4,7 @@ import React from 'react'
 import style from './Card.module.scss' 
 
 
-export default function CardPetDetail({breed, sex, age, birthday}: {breed: string, sex: "Male" | "Femail", age: string, birthday: string}) {
+export default function CardPetDetail({breed, sex, age, birthday}: {breed: string, sex: "Male" | "Female", age: string, birthday: string}) {
     const Field = ({text, icon, content}: {text:string,icon:string, content: string}) => (
         <div>
             <div><Image  src={ icon } alt="Logo" width={20} height={20} /> <span>{text}</span></div> 

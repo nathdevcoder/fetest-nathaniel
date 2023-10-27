@@ -54,3 +54,20 @@ export async function GetApointments(id:string) {
       }
 }
 
+export async function getSingleAppointment(id: string, key: string) {
+    const docRef = doc(db, 'fetest', id);
+    try {
+        const docSnapshot = await getDoc(docRef); 
+        if (docSnapshot.exists()) {
+            const snap = docSnapshot.data();
+            const data = snap[key]
+            if(!data) return { success: true, message: 'No appointment data found', data: null };
+            else return { success: true, message: 'Appointment data retrieved successfully', data };
+        } else {
+            return { success: true, message: 'No appointment data found', data: [] };
+        }
+    } catch (error) {
+        console.error(error);
+        return { success: false, message: 'Oops, something went wrong', data: null };
+    }
+}

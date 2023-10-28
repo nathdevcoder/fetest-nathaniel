@@ -3,13 +3,24 @@
 
 .TextInput { 
     width: 100%;
-    padding: 8px 10px;
+    padding: 6px 12px;
     border: none;
     border-radius: 8px;
+    width: 100%;
     &Wrapper {
-        @include mx.Col(flex-start, flex-start); 
-        margin: 12px;
-        row-gap: 4px;
+        @include mx.Row(flex-start, flex-start); 
+        margin: 20px;
+        column-gap: 40px;
+        & label {
+            width: 100px;
+        }
+    }
+    &Fields {
+        width: 100%;
+        & p {
+            font-size: 12px;
+            line-height: 18px;
+        }
     }
     &Error {
         @extend .TextInput;

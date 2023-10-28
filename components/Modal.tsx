@@ -5,6 +5,8 @@ import useFetcher from '@/hooks/useFetcher'
 import TextInput from './snippets/TextInput'
 import dayjs from 'dayjs';
 import 'dayjs/locale/en';
+import CardDetail from './snippets/CardDetail'
+import CardHeader from './snippets/CardHeader'
 
 type modalType = {
   open: boolean,
@@ -95,51 +97,51 @@ export default function Modal(props: modalType) {
     }}>
       { loading ? <div className={style.ModalContent}>Loading...</div> :
       <div className={style.ModalContent}>
-        <p>{today}</p>
-        <div className={style.ModalBody}> 
-          <div>
-            <TextInput inputVal={owner} SetVal={setOwner} label='Owner' />
-            <TextInput inputVal={phone} SetVal={setPhone} label='Phone' />
-            <TextInput inputVal={email} SetVal={setEmail} label='Email' />
-            <TextInput inputVal={address} SetVal={setAddress} label='Address' />
+          <h5>{today}</h5>  
+          <hr />
+          <TextInput inputVal={owner} SetVal={setOwner} label='Your Name' />
+          <hr />
+          <h6>CONTACT INFORMATION</h6>
+          <TextInput inputVal={email} SetVal={setEmail} label='Email' />
+          <TextInput inputVal={phone} SetVal={setPhone} label='Phone' />
+          <TextInput inputVal={address} SetVal={setAddress} label='Address' /> 
+          <hr />
+          <h6>PET DETAILS</h6> 
+          <TextInput inputVal={name} SetVal={setName} label='Pet Name' />
+          <TextInput inputVal={age} SetVal={setAge} label='Pet Age' />
+          <TextInput inputVal={breed} SetVal={setBreed} label='Pet Breed' /> 
+          <div className={style.Selects}>
+            <select name="pet" id="pet" value={pet} onChange={(e)=> setPet(e.target.value as "Cat"|"Dog")}>
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+            </select>
+            <select name="gender" id="gender" value={gender} onChange={(e)=> setGender(e.target.value as "Male"|"Female")}>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>  
           </div>
-          <div>
-            <TextInput inputVal={name} SetVal={setName} label='Pet Name' />
-            <TextInput inputVal={age} SetVal={setAge} label='Pet Age' />
-            <TextInput inputVal={breed} SetVal={setBreed} label='Pet Breed' /> 
-            <div className={style.Selects}>
-              <select name="pet" id="pet" value={pet} onChange={(e)=> setPet(e.target.value as "Cat"|"Dog")}>
-                <option value="Dog">Dog</option>
-                <option value="Cat">Cat</option>
-              </select>
-              <select name="gender" id="gender" value={gender} onChange={(e)=> setGender(e.target.value as "Male"|"Female")}>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-              </select>
-            </div>
-          </div>
-        </div>
+          <hr />
+          <h6>CLINIC DETAILS</h6>  
         <div className={style.TimeInputs}>
           <input type="time" max={end} value={start} onChange={(e)=>setStart(e.target.value)}/>
           <input type="time" min={start} value={end} onChange={(e)=>setEnd(e.target.value)}/>
         </div>
         <div className={style.Selects}>
           <select name="type" id="type" value={type} onChange={(e)=> setType(e.target.value as "Consultation"|"Vacination")}>
-                <option value="Consultation">Consultation</option>
-                <option value="Vacination">Vacination</option>
-              </select>
+            <option value="Consultation">Consultation</option>
+            <option value="Vacination">Vacination</option>
+          </select>
           <select name="vet" id="vet" value={vet} onChange={(e)=> setVet(e.target.value as "anika" |"danika"| "john")}>
               <option value="anika">Anika Perry</option>
               <option value="danika">Danica Jane</option>
               <option value="john">John Fins</option>
           </select>
-        </div> 
+        </div>   
         <div className={style.Detail}>
-          <p>{vetDetail.address}</p>
-          <p>{vetDetail.building}</p>
-          <p>{vetDetail.contact_number}</p>
-          <p>{vetDetail.veterinary_name}</p>
+          <CardHeader title={vetDetail.building} subtitle={vetDetail.veterinary_name} avatar='https://randomuser.me/api/portraits/men/1.jpg' />
+          <CardDetail email={vetDetail.veterinary_name} address={vetDetail.address} phone={vetDetail.contact_number} /> 
         </div>
+        <hr />
         <div className={style.Actions}>
           <button onClick={onSubmitHandler} disabled={loading}>
             {props.type === 'post'? 'Post' : 'Update'}

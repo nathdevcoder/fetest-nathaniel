@@ -16,14 +16,26 @@
     }
     &Content {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 800px;
-        width: 100%;
-        min-height: 500px; 
+        top: 0;
+        right: 0;
+        bottom: 0;
+        max-width: 550px;
+        width: 100%; 
         background: white;
         padding: 20px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        & h5 {
+            color: vr.$backgoundprimary; 
+            @include mx.TextContent(700, 24px, 0.48px);
+            margin: 20px 0;
+        }
+        & h6 {
+            color: vr.$paragsecondary; 
+            @include mx.TextContent(800, 14px, 0.28px); 
+            margin: 20px;
+            margin-top: 10px;
+        }
     }
     &Body {
         @include mx.Row(flex-start, flex-start);
@@ -40,6 +52,7 @@
         width: 100%;
         padding: 8px;
         margin: 12px;
+        border-radius: 8px;
     }
 }
 
@@ -51,6 +64,7 @@
         width: 100%;
         padding: 8px;
         margin: 12px;
+        border-radius: 8px; 
     }
 }
 .Actions {
@@ -60,11 +74,26 @@
     & button { 
         padding: 12px 20px;
         margin: 20px;
-        background: vr.$primary;
-        border: none;
-        color: white;
         width: 200px;
         border-radius: 12px;
+        &:first-child {
+            border: none;
+            background: vr.$primary;
+            color: white; 
+            &:hover {
+                background: vr.$primarydark ;
+            }
+        }
+        &:last-child {
+            background: white;
+            color: vr.$paragsecondary;
+            border: 1px solid vr.$paragsecondary;
+            &:hover {
+                border: none;
+                color: vr.$primary;
+                background: vr.$primarylight ;
+            }
+        }
     }
 }
 .Detail {

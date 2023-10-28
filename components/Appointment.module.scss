@@ -26,6 +26,9 @@
         background: vr.$primary;
         border: none;
         cursor: pointer;
+        &:hover {
+            background: vr.$primarydark ;
+        }
     }
     &NexterUI {
         @include mx.Row(flex-start);
@@ -48,7 +51,7 @@
                 background: vr.$backgoundprimarylight;
                 border-radius: 100px;
                 cursor: pointer;
-                @include mx.Row; 
+                @include mx.Row;  
             }
         }
     }

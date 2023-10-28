@@ -69,11 +69,19 @@
             &.Primary {
                 color: white;
                 background: vr.$primary;
+                &:hover {
+                    background: vr.$primarydark ;
+                }
             }
             &.Secondary {
                 background: white;
                 color: vr.$paragsecondary;
                 border: 1px solid vr.$paragsecondary;
+                &:hover {
+                    border: none;
+                    color: vr.$primary;
+                    background: vr.$primarylight ;
+                }
             }
         } 
         &Delete { 

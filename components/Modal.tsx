@@ -1,18 +1,35 @@
 'use client'
-import React, { useState } from 'react'
+import React  from 'react'
 import style from './Modal.module.scss'
 import useFetcher from '@/hooks/useFetcher'
 import TextInput from './snippets/TextInput'
+import dayjs from 'dayjs';
+import 'dayjs/locale/en';
 
 type modalType = {
   open: boolean,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   id: string
-  today: string
   reFetch: ()=>Promise<void>
-}
+} & ({
+  type: 'post' 
+  today: string
+} | {
+  type: 'update'
+  propkey: string
+  appointment: singleAppointmentType
+})
 
-export default function Modal({open, setOpen, id, today, reFetch}: modalType) { 
+export default function Modal(props: modalType) {
+    let today = ''
+    let appiontment = null
+    const {open, setOpen, id, reFetch} = props
+    if(props.type === 'post') today = props.today
+    if(props.type === 'update') {
+      today = dayjs(id, 'YYYYMMDD').locale('en').format('dddd, MMMM D, YYYY');
+      appiontment = props.appointment
+    }
+
     const {
       breed,
       setBreed,
@@ -36,7 +53,7 @@ export default function Modal({open, setOpen, id, today, reFetch}: modalType) {
       setVet,
       vetDetail,
       loading,
-      Post,
+      onSubmit,
       start,
       setStart,
       end,
@@ -44,12 +61,32 @@ export default function Modal({open, setOpen, id, today, reFetch}: modalType) {
       reset,
       type,
       setType
-    } = useFetcher()
-
-    async function onSuccess() {
-      await reFetch()
-      reset()
-      setOpen(false)
+    } = useFetcher(appiontment) 
+    
+    async function onSubmitHandler() {
+        if(props.type === 'post') { 
+          await onSubmit({
+            id,
+            method: "POST",
+            onSuccess: async () => {
+              await reFetch()
+              reset()
+              setOpen(false)
+            },
+            onError: ()=>setOpen(false)
+          }) 
+        } else if(props.type === 'update') {
+          await onSubmit({
+            id,
+            key: props.propkey,
+            method: "PATCH",
+            onSuccess: async () => {
+              await reFetch() 
+              setOpen(false)
+            },
+            onError: ()=>setOpen(false)
+          })  
+        }
     }
 
   return (
@@ -104,8 +141,8 @@ export default function Modal({open, setOpen, id, today, reFetch}: modalType) {
           <p>{vetDetail.veterinary_name}</p>
         </div>
         <div className={style.Actions}>
-          <button onClick={()=>Post(id, onSuccess, ()=>setOpen(false))} disabled={loading}>
-            Post
+          <button onClick={onSubmitHandler} disabled={loading}>
+            {props.type === 'post'? 'Post' : 'Update'}
           </button>
           <button onClick={()=>setOpen(false)} >
             Close

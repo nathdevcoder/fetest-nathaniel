@@ -6,7 +6,7 @@ type dataType = {
     notvalid: boolean;
 }
 type setDataType = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=> void
-type resetDataType = ( ) => void
+type resetDataType = ( data?: string ) => void
 
 export default function useTextInput(msg:string): [dataType, setDataType, resetDataType]{
     const [data , setData] = useState({val: '', msg: msg, notvalid: true})
@@ -15,8 +15,9 @@ export default function useTextInput(msg:string): [dataType, setDataType, resetD
         if(val) setData({val, msg:"", notvalid: false})
         else setData({val:'', msg: msg, notvalid: true})
     }
-    function resetData() {
-        setData({val:'', msg: msg, notvalid: true})
+    function resetData(data?: string) {
+        if(data) setData({val:data, msg: '', notvalid: false})
+        else setData({val:'', msg: msg, notvalid: true})
     }
   return [ data, SetData, resetData]
 }

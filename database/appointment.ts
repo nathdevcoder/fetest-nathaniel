@@ -81,9 +81,28 @@ export async function deleteSingleAppointment(id: string, key: string) {
         }; 
         await updateDoc(docRef, updateData); 
         return { success: true, message: 'Appointment deleted successfully' };
-        
+
     } catch (error) {
         console.error(error);
         return { success: false, message: 'Oops, something went wrong', data: null };
+    }
+}
+
+export async function UpdateApointment(id:string, key: string, data: any) { 
+    const docRef = doc(db, 'fetest', id); 
+    const customData = customizeAppointmentDetail(data)
+    try { 
+        const docSnapshot = await getDoc(docRef);
+        if (docSnapshot.exists()) { 
+            await updateDoc(docRef, {
+                [key]: customData
+            });
+        } else { 
+            return { success: true, message: 'No appointment data found' };
+        }
+        return { success: true, message: 'Document updated or added successfully' };
+    } catch (error) {
+        console.error(error);
+        return { success: false, message: 'Oops, something went wrong' };
     }
 }

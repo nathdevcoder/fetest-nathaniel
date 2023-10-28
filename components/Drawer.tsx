@@ -35,7 +35,7 @@ export default function Drawer({onClose, appointment, loading, identifier, reFet
                 <CardPetDetail breed={appointment.breed} sex={appointment.gender as ("Male" | "Female")} age={appointment.age} birthday='january 12, 2022' />
             </div>
             <div className={style.DrawerPaper}>
-                <CardActions id={identifier} propkey={appointment.key} reFetch={reFetch} onClose={onClose} />
+                <CardActions id={identifier} propkey={appointment.key} reFetch={reFetch} onClose={onClose} appointment={appointment} />
             </div>
         </> ) 
         : <div className={style.DrawerPaper}>No Appointment Data</div>}

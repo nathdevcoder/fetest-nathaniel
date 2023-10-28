@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className={styles.body}> 
       <div className={styles.main}> 
-        <Modal open={open} setOpen={setOpen} id={identifier} today={`${currentMonth} ${currentDate}, ${currentYear}`} reFetch={reFetch}/> 
+        <Modal open={open} setOpen={setOpen} id={identifier} today={`${currentMonth} ${currentDate}, ${currentYear}`} reFetch={reFetch} type='post'/> 
         <Appointments 
           date={`Today is ${currentDayOfWeek}, ${currentMonth} ${currentDate}, ${currentYear}`} 
           month={currentMonth}

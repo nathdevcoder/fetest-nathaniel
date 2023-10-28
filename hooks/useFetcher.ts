@@ -1,10 +1,11 @@
 
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useTextInput from './snippets/useTextInput'
 import Vets from '@/data/veterinary'
+import { reFormatTime } from '@/utils/Keeper'
 
-export default function useFetcher() {
+export default function useFetcher(appointment: singleAppointmentType | null) {
     const [start, setStart] = useState('00:00')
     const [end, setEnd] = useState('23:00')
     const [breed, setBreed, resetbreed] = useTextInput('pet breed field is required')
@@ -21,6 +22,24 @@ export default function useFetcher() {
     const vetDetail = Vets[vet]
     const [loading, setLoading] = useState(false)
 
+    useEffect(()=>{
+        if(appointment) {
+            resetbreed(appointment.breed)
+            resetage(appointment.age)
+            resetemail(appointment.email)
+            resetowner(appointment.owner)
+            resetaddress(appointment.address)
+            resetname(appointment.name)
+            resetphone(appointment.phone)
+            setStart(reFormatTime(appointment.start))
+            setEnd(reFormatTime(appointment.end))
+            setGender(appointment.gender)
+            setType(appointment.type)
+            setPet(appointment.pet)
+            setVet(appointment.vet)
+        }
+    },[])
+
     function notValid() {
         const error: string[] = []
         if(breed.notvalid) error.push(breed.msg)
@@ -35,35 +54,37 @@ export default function useFetcher() {
             return true
         } else return false
     }
-
-    async function Post(id: string, onSuccess?: () => Promise<void>, onError?: ()=>void) {
-        if(notValid()) return
+ 
+    async function onSubmit({id, onSuccess, onError, method, key }:{id: string, key?: string, onSuccess?: () => Promise<void>, onError?: ()=>void, method: "POST" | "PATCH" }) {
+        if(notValid()) return 
+        const data: any = {
+            id: id, 
+            data: {
+                breed: breed.val,
+                owner: owner.val,
+                age: age.val,
+                address: address.val,
+                email: email.val,
+                name: name.val,
+                phone: phone.val,
+                pet: pet ,
+                gender: gender ,
+                vet: vet,
+                vetDetail: vetDetail,
+                start,
+                end,
+                type
+            }
+        }
+        if(key) data['key'] = key
         try {
             setLoading(true)  
             const res = await fetch(`/api/schedule`, {
-                method: 'POST',
+                method: method,
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    id: id,
-                    data: {
-                        breed: breed.val,
-                        owner: owner.val,
-                        age: age.val,
-                        address: address.val,
-                        email: email.val,
-                        name: name.val,
-                        phone: phone.val,
-                        pet: pet ,
-                        gender: gender ,
-                        vet: vet,
-                        vetDetail: vetDetail,
-                        start,
-                        end,
-                        type
-                    }
-                })
+                body: JSON.stringify(data)
             })
             if(!res.ok) throw Error('oops something went wrong')
             const result = await res.json() as {success: boolean, message: string}
@@ -115,7 +136,7 @@ export default function useFetcher() {
     setVet,
     vetDetail,
     loading,
-    Post,
+    onSubmit,
     start,
     setStart,
     end,

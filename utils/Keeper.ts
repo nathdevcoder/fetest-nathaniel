@@ -40,3 +40,16 @@ function formatTime(data: string) {
     } 
     return `${hour.toString().padStart(2, '0')}:${minutes} ${period}`;
 }
+
+export function reFormatTime(data: string) {
+  const [time, period] = data.split(' '); 
+  const [hours, minutes] = time.split(':');
+  let hour = parseInt(hours, 10); 
+  if (period === 'PM' && hour < 12) {
+      hour += 12;
+  } else if (period === 'AM' && hour === 12) {
+      hour = 0;
+  } 
+  const formattedHour = hour.toString().padStart(2, '0');
+  return `${formattedHour}:${minutes}`;
+}

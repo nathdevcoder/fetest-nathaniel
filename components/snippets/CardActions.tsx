@@ -2,9 +2,19 @@
 import React, { useState } from 'react'
 import style from './Card.module.scss' 
 import PopUp from './PopUp' 
+import Modal from '../Modal'
 
-export default function CardActions({id, propkey, reFetch, onClose}: {id: string, propkey: string, reFetch: ()=> Promise<void>, onClose: () => void}) {
+type CardActionType = {
+  id: string, 
+  propkey: string, 
+  reFetch: ()=> Promise<void>, 
+  onClose: () => void
+  appointment: singleAppointmentType
+}
+
+export default function CardActions({id, propkey, reFetch, onClose, appointment}: CardActionType) {
   const [popup, setPopup] = useState({open: false, message: 'Cancel this appointment?'})
+  const [open, setOpen] = useState(false)
 
   async function onDelete() {
     try {
@@ -31,6 +41,7 @@ export default function CardActions({id, propkey, reFetch, onClose}: {id: string
 
   return (
     <div className={style.CardActions}>
+        <Modal open={open} setOpen={setOpen} id={id} propkey={propkey} reFetch={reFetch} type='update' appointment={appointment}/> 
         <PopUp open={popup.open} setOpen={setPopup}>
             <div className={style.CardActionsDelete}> 
               <h6>{popup.message}</h6>
@@ -38,7 +49,7 @@ export default function CardActions({id, propkey, reFetch, onClose}: {id: string
               <button onClick={onDelete} className={style.Primary}>Cancel</button>  
             </div>
         </PopUp>
-        <button className={style.Primary} >Rechedule Appointment</button>
+        <button className={style.Primary} onClick={()=> setOpen(true)} >Rechedule Appointment</button>
         <button className={style.Secondary} onClick={()=>setPopup({open: true, message: 'Cancel this appointment?'})}> Cancel Appointment</button>
     </div>
   )

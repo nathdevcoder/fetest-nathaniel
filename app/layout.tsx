@@ -1,10 +1,8 @@
-import type { Metadata } from 'next'
-import { Urbanist } from 'next/font/google'
+import type { Metadata } from 'next' 
 import '@styles/Styler.scss'
 import SideBar from '@/components/SideBar'
 import TopBar from '@/components/TopBar'
-
-const urbanist = Urbanist({ subsets: ['latin'] })
+ 
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={urbanist.className}>
+      <body >
         <div className='Layout'>
           <SideBar/>  
           <main>

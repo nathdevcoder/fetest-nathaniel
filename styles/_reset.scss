@@ -1,4 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap');
+ 
+@font-face {
+  font-family: 'UrbanistLocal';
+  src: url('./fonts/Urbanist-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'UrbanistLocal';
+  src: url('./fonts/Urbanist-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'UrbanistLocal';
+  src: url('./fonts/Urbanist-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'UrbanistLocal';
+  src: url('./fonts/Urbanist-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+}
+@font-face {
+  font-family: 'UrbanistLocal';
+  src: url('./fonts/Urbanist-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'UrbanistLocal';
+  src: url('./fonts/Urbanist-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
 a {
     text-decoration: none;
     color: unset;
@@ -13,7 +43,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Urbanist', sans-serif;
+    font-family: 'UrbanistLocal', sans-serif;
 }  
 svg {
   fill: transparent !important;
@@ -25,9 +55,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Urbanist', sans-serif;
+  font-family: 'UrbanistLocal', sans-serif;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
 }
 h1 {
   font-size: 64px;
@@ -60,7 +90,7 @@ p,
 a,
 legend,
 button {
-  font-family: 'Urbanist', sans-serif;
+  font-family: 'UrbanistLocal', sans-serif;
   font-style: normal;
 }
 p {

@@ -59,20 +59,30 @@
     &Actions {
         @include mx.Col;
         row-gap: 20px;
-        & button {
+        &  button {
             width: 100%;
             padding: 12px 20px;
             border: none;
             border-radius: 12px;
+            cursor: pointer;
             @include mx.TextContent(500, 16px, 0.32px);   
-            &:first-child {
+            &.Primary {
                 color: white;
                 background: vr.$primary;
             }
-            &:last-child {
+            &.Secondary {
                 background: white;
                 color: vr.$paragsecondary;
                 border: 1px solid vr.$paragsecondary;
+            }
+        } 
+        &Delete { 
+            & button {
+                width: 100px;
+                float: right;
+            }
+            & hr {
+                margin: 20px 0;
             }
         }
     }

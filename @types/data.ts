@@ -23,6 +23,7 @@ type appointmentRespondType = {
   }[]
 
   type singleAppointmentType = {
+    key: string
     address: string
     age: string
     bottom: number

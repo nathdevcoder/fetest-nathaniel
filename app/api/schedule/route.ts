@@ -1,4 +1,4 @@
-import { PostApointment, getSingleAppointment } from '@/database/appointment'
+import { PostApointment, deleteSingleAppointment, getSingleAppointment } from '@/database/appointment'
 import { NextRequest, NextResponse } from 'next/server' 
 
 
@@ -16,4 +16,13 @@ export async function POST(request: NextRequest)  {
     if(!body.id || ! body.data ) return NextResponse.json({ success: false, message: 'no data provided' })
     const res = await PostApointment(body.id, body.data) 
     return NextResponse.json(res)
+}
+
+export async function DELETE(request: NextRequest) {
+  const body = await request.json() 
+  const id = body.id
+  const key = body.key
+  if(!id || !key) return NextResponse.json({ success: false, message: 'no data provided'  })
+  const data = await deleteSingleAppointment(id, key)
+  return NextResponse.json(data)
 }

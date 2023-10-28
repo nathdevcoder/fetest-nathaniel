@@ -10,9 +10,11 @@ type DrawerType = {
     onClose: () => void
     appointment: singleAppointmentType | null
     loading: boolean
+    reFetch: () => Promise<void>
+    identifier: string
 }
 
-export default function Drawer({onClose, appointment, loading}:DrawerType) {
+export default function Drawer({onClose, appointment, loading, identifier, reFetch}:DrawerType) {
   return (
     <div className={style.Drawer}>
         <button onClick={onClose} className={style.close}><Image src={'/CloseRounded.svg'} alt="Logo" width={24} height={24} /></button>
@@ -33,7 +35,7 @@ export default function Drawer({onClose, appointment, loading}:DrawerType) {
                 <CardPetDetail breed={appointment.breed} sex={appointment.gender as ("Male" | "Female")} age={appointment.age} birthday='january 12, 2022' />
             </div>
             <div className={style.DrawerPaper}>
-                <CardActions />
+                <CardActions id={identifier} propkey={appointment.key} reFetch={reFetch} onClose={onClose} />
             </div>
         </> ) 
         : <div className={style.DrawerPaper}>No Appointment Data</div>}

@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
 import style from './TopBar.module.scss' 
+import BellIcon from './icons/BellIcon'
+import SettingsIcon from './icons/SettingsIcon'
+import SignoutIcon from './icons/SignoutIcon'
 export default function TopBar() {
   return (
     <div className={style.Topbar}>
@@ -31,13 +34,13 @@ export default function TopBar() {
                 </svg>   
             </div>
             <button>
-                <Image src={'/bell.svg'} alt="search button"  width={20} height={20} />
+                <BellIcon />
+            </button>
+            <button className={style.setting}>
+                <SettingsIcon />
             </button>
             <button>
-                <Image src={'/settings.svg'} alt="search button"  width={20} height={20} />
-            </button>
-            <button>
-                <Image src={'/signout.svg'} alt="search button"  width={20} height={20} />
+                <SignoutIcon />
             </button> 
         </div>
     </div>

@@ -52,6 +52,28 @@
                 border-radius: 100px;
                 cursor: pointer;
                 @include mx.Row;  
+                & svg { 
+                    display: block;
+                }
+                &:hover {
+                    background: vr.$primarylight;
+                    & svg path {
+                        stroke: vr.$primary;
+                    }
+                }
+                &:focus{
+                    background: vr.$primarylight; 
+                    border: 1px solid vr.$primary;
+                    & svg path {
+                        stroke: vr.$primary;
+                    }
+                }
+                &:active {
+                    background: vr.$primary;
+                    & svg path {
+                        stroke: white;
+                    }
+                }
             }
         }
     }

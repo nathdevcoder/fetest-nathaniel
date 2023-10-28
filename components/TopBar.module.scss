@@ -29,7 +29,7 @@
             height: 100%;
             aspect-ratio: 1;
             border: none;
-            background: none;
+            background: none; 
         }
     }
     &Settings {
@@ -52,7 +52,53 @@
             background: vr.$backgoundprimarylight;
             border: none;
             border-radius: 100px;
-            cursor: pointer; 
+            cursor: pointer;  
+            & svg {
+                scale: 0.8; 
+                display: block;
+            }
+            &:hover {
+                background: vr.$primarylight;
+                & svg path {
+                    stroke: vr.$primary;
+                }
+            }
+            &:focus{
+                background: vr.$primarylight; 
+                border: 1px solid vr.$primary;
+                & svg path {
+                    stroke: vr.$primary;
+                }
+            }
+            &:active {
+                background: vr.$primary;
+                & svg path {
+                    stroke: white;
+                }
+            }
         }
     }
 }
+.setting {
+    & svg path {
+        fill: vr.$paragaprimary;
+    }
+    &:hover { 
+        & svg path {
+            fill: vr.$primary;
+            stroke: none;
+        }
+    } 
+    &:active { 
+        & svg path {
+            stroke: none;
+            fill: white;
+        }
+    }
+    &:focus{ 
+        & svg path {
+            stroke: none; 
+            fill: vr.$primary;
+        }
+    }
+} 

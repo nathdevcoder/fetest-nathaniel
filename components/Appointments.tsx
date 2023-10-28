@@ -1,7 +1,8 @@
 'use client'   
-
-import Image from 'next/image';
+ 
 import style from './Appointment.module.scss' 
+import LeftChevron from './icons/LeftChevron';
+import RightChevron from './icons/RightChevron';
 
 type AppointmentType = {
     date: string
@@ -23,10 +24,10 @@ export default function Appointments({date, month, isLoading, setOpen, previousD
                 <p>{month}</p>
                 <div>
                     <button onClick={previousDay}>
-                        <Image src={'/lchevron.svg'} alt="search button"  width={20} height={20} />
+                        <LeftChevron />
                     </button>
                     <button onClick={nextDay}>
-                        <Image src={'/rchevron.svg'} alt="search button"  width={20} height={20} /> 
+                        <RightChevron/>
                     </button>
                 </div>
             </div>

@@ -3,7 +3,19 @@
 import React, { useState }from 'react'
 import Image from 'next/image'
 import style from './SideBar.module.scss'
-import NavLink from './snippets/NavLink'
+import NavLink from './snippets/NavLink' 
+import HomeIcon from './icons/HomeIcon'
+import AppointmentIcon from './icons/AppointmentIcon'
+import MessageIcon from './icons/MessageIcon'
+import ContactIcon from './icons/ContactIcon'
+import AnalyticsIcon from './icons/AnalyticsIcon'
+import SubscriptionIcon from './icons/SubscriptionIcon'
+import HelpIcon from './icons/HelpIcon'
+import SettingsIcon from './icons/SettingsIcon'
+import { Urbanist } from 'next/font/google'
+
+
+const urbanist = Urbanist({ subsets: ['latin'] })
 
 export default function SideBar() {
     const [active, setActive] = useState(true)
@@ -20,23 +32,20 @@ export default function SideBar() {
                 />
             </button>
             <div className={style.SideBarLogo}>
-                <Image 
-                src={active? '/Top.svg' : '/Logo.svg'}
-                alt="Logo"
-                width={103}
-                height={36}
-                priority
-                />
+                <div className={ active ? style.Open : style.NotOpen }>
+                    <Image src={'/Logo.svg'}  alt="Logo" width={36} height={36} priority />
+                    <p className={ active ? style.Open : style.NotOpen }>LOREM</p>
+                </div>
             </div>
-            <div className={style.SideBarLinks}>
-                <NavLink icon='/home.svg' text='Home' link='/' open={active} />
-                <NavLink icon='/appointments.svg' text='Appointments' link='/' open={active} />
-                <NavLink icon='/messages.svg' text='Message' link='/messages' open={active} />
-                <NavLink icon='/contacts.svg' text='Contacts' link='/contacts' open={active} />
-                <NavLink icon='/analytics.svg' text='Data Analytics' link='/analytics' open={active} />
-                <NavLink icon='/subscription.svg' text='Subscription' link='/subscription' open={active} />
-                <NavLink icon='/center.svg' text='Help Center' link='/help' open={active} />
-                <NavLink icon='/settings.svg' text='Settings' link='/setting' open={active} />
+            <div className={style.SideBarLinks}> 
+                <NavLink icon={<HomeIcon />} text='Home' link='/' open={active} />
+                <NavLink icon={<AppointmentIcon />} text='Appointments' link='/' open={active} />
+                <NavLink icon={<MessageIcon />} text='Message' link='/messages' open={active} />
+                <NavLink icon={<ContactIcon/>} text='Contacts' link='/contacts' open={active} />
+                <NavLink icon={<AnalyticsIcon />} text='Data Analytics' link='/analytics' open={active} />
+                <NavLink icon={<SubscriptionIcon />} text='Subscription' link='/subscription' open={active} />
+                <NavLink icon={<HelpIcon />} text='Help Center' link='/help' open={active} />
+                <NavLink icon={<SettingsIcon />} text='Settings' link='/setting' open={active} />
             </div>
             <div className={style.SideBarFooter}>
                 <div>

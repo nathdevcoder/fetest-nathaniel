@@ -111,6 +111,8 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
                 alert(result.message || 'appointment saved')  
                 if(onSuccess) await onSuccess()
                 if(method === 'POST') setStorageID(createId())
+                resePet("")
+                resetAvatar("")
             } else {
                 alert(result.message || 'appointment not saved')  
                 if(onError) onError()  

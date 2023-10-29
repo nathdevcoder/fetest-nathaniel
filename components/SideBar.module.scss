@@ -8,7 +8,9 @@ $sidebaractivewidth: 240px;
     &Space {
         width: $sidebarwidth;
         transition: all 300ms;
+        flex-shrink: 0;
         &Active {
+            flex-shrink: 0;
             width: $sidebaractivewidth;
             transition: all 300ms;
         }

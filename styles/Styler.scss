@@ -9,7 +9,10 @@ main {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden; 
+    overflow-x: scroll;
 }
 
 button {

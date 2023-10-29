@@ -6,6 +6,8 @@
     @include mx.Row;
     column-gap: 40px;
     border-bottom: 1px solid vr.$bordercolor;
+    width: 100%;
+    min-width: 970px;
     &Search {
         position: relative;
         width: 100%;

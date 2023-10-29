@@ -47,5 +47,6 @@ type appointmentRespondType = {
         building: string
         contact_number: string
         veterinary_name: string
+        image: string
     }
   }

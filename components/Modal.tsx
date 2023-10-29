@@ -69,7 +69,8 @@ export default function Modal(props: modalType) {
       avatarFile, 
       petFile, 
       petUrl, 
-      sePet
+      sePet,
+      storageID
     } = useFetcher(appiontment) 
     
     async function onSubmitHandler() {
@@ -104,7 +105,7 @@ export default function Modal(props: modalType) {
     }}>
       { loading ? <div className={style.ModalContent}>Loading...</div> :
       <div className={style.ModalContent}>
-          <h5>{today}</h5>  
+          <h5>{today} - {storageID}</h5>  
           <hr />
           <TextInput inputVal={owner} SetVal={setOwner} label='YourName' />
           <FileInput inputVal={avatarFile} SetVal={setAvatar} label='Avatar' Url={avatarUrl}/>

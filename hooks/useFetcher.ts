@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import useTextInput from './snippets/useTextInput'
 import Vets from '@/data/veterinary'
-import { reFormatTime } from '@/utils/Keeper'
+import { createId, reFormatTime } from '@/utils/Keeper'
 import useFileInput from './snippets/useFileInput'
+import { saveUserImage } from '@/database/storage'
 
 export default function useFetcher(appointment: singleAppointmentType | null) {
     const [start, setStart] = useState('00:00')
@@ -24,6 +25,7 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
     const [vet, setVet] = useState<'anika' | 'danika' | 'john' >('john')
     const vetDetail = Vets[vet]
     const [loading, setLoading] = useState(false)
+    const [storageID, setStorageID] = useState(appointment?.media|| createId())
 
     useEffect(()=>{
         if(appointment) {
@@ -76,14 +78,26 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
                 gender: gender ,
                 vet: vet,
                 vetDetail: vetDetail,
-                start,
-                end,
-                type
+                start: start,
+                end: end,
+                type: type,
+                media: storageID,
+                avatar: appointment?.avatar || "",
+                petimage: appointment?.petimage || ""
             }
         }
         if(key) data['key'] = key
         try {
             setLoading(true)  
+            if(!avatarFile.notvalid && avatarFile.val) {
+                console.log(!avatarFile.notvalid, avatarFile.val); 
+                const ownerurl = await saveUserImage(avatarFile.val, id, storageID, 'owner')
+                if(ownerurl) data['data']['avatar'] = ownerurl
+            }
+            if(!petFile.notvalid && petFile.val) {
+                const peturl = await saveUserImage(petFile.val, id, storageID, 'pet')
+                if(peturl) data['data']['petimage'] = peturl 
+            }
             const res = await fetch(`/api/schedule`, {
                 method: method,
                 headers: {
@@ -96,6 +110,7 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
             if(result.success) {
                 alert(result.message || 'appointment saved')  
                 if(onSuccess) await onSuccess()
+                if(method === 'POST') setStorageID(createId())
             } else {
                 alert(result.message || 'appointment not saved')  
                 if(onError) onError()  
@@ -155,5 +170,6 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
     petFile, 
     petUrl, 
     sePet,
+    storageID
   }
 }

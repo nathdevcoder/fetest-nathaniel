@@ -29,6 +29,10 @@ export default function Home() {
   } = useDayNexter()
 
   
+  async function reFetchSingleAppoimtment() {
+    await reFetch()
+    await FetchAppointment()
+  }
 
 
   return (
@@ -46,7 +50,7 @@ export default function Home() {
         <DayTimeSchedule appointments={data} openDetail={onOpenDrawer}/> 
       </div>
       <div className={ drawer.open ? styles.assideActive : styles.asside}>
-        <Drawer onClose={onCloseDrawer} appointment={appointment} identifier={identifier} loading={isLoading} reFetch={reFetch}/>
+        <Drawer onClose={onCloseDrawer} appointment={appointment} identifier={identifier} loading={isLoading} reFetch={reFetchSingleAppoimtment} />
       </div>
     </div>
 

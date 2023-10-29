@@ -4,9 +4,9 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'randomuser.me',
+                hostname: 'firebasestorage.googleapis.com',
                 port: '',
-                pathname: '/api/portraits/**'
+                pathname: '/v0/b/next-exam-1d63a.appspot.com/**'
             }
         ]
     }

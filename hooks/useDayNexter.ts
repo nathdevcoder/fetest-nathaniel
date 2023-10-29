@@ -17,9 +17,11 @@ export default function useDayNexter() {
 
     const handleNextDay = () => {
       setCurrentDay(currentDay.add(1, 'day'));
+      setDrawer({open: false, id: ''})
     };
     const handlePreviousDay = () => {
       setCurrentDay(currentDay.subtract(1, 'day'));
+      setDrawer({open: false, id: ''})
     };
     function onOpenDrawer(id: string) {
         setDrawer({open: true, id})

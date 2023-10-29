@@ -69,8 +69,7 @@ export default function Modal(props: modalType) {
       avatarFile, 
       petFile, 
       petUrl, 
-      sePet,
-      storageID
+      sePet 
     } = useFetcher(appiontment) 
     
     async function onSubmitHandler() {
@@ -105,7 +104,7 @@ export default function Modal(props: modalType) {
     }}>
       { loading ? <div className={style.ModalContent}>Loading...</div> :
       <div className={style.ModalContent}>
-          <h5>{today} - {storageID}</h5>  
+          <h5>{today}</h5>  
           <hr />
           <TextInput inputVal={owner} SetVal={setOwner} label='YourName' />
           <FileInput inputVal={avatarFile} SetVal={setAvatar} label='Avatar' Url={avatarUrl}/>
@@ -121,10 +120,12 @@ export default function Modal(props: modalType) {
           <TextInput inputVal={age} SetVal={setAge} label='Pet Age' />
           <TextInput inputVal={breed} SetVal={setBreed} label='Pet Breed' /> 
           <div className={style.Selects}>
+            <label htmlFor="pet">Pet</label>
             <select name="pet" id="pet" value={pet} onChange={(e)=> setPet(e.target.value as "Cat"|"Dog")}>
               <option value="Dog">Dog</option>
               <option value="Cat">Cat</option>
             </select>
+            <label htmlFor="gender">Sex</label>
             <select name="gender" id="gender" value={gender} onChange={(e)=> setGender(e.target.value as "Male"|"Female")}>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -133,17 +134,21 @@ export default function Modal(props: modalType) {
           <hr />
           <h6>CLINIC DETAILS</h6>  
         <div className={style.TimeInputs}>
-          <input type="time" max={end} value={start} onChange={(e)=>setStart(e.target.value)}/>
-          <input type="time" min={start} value={end} onChange={(e)=>setEnd(e.target.value)}/>
+          <label htmlFor="dfrom">From</label>
+          <input type="time" max={end} id='dfrom' value={start} onChange={(e)=>setStart(e.target.value)}/>
+          <label htmlFor="dto">To</label>
+          <input type="time" min={start} id='dto' value={end} onChange={(e)=>setEnd(e.target.value)}/>
         </div>
         <div className={style.Selects}>
+          <label htmlFor="type">For</label>
           <select name="type" id="type" value={type} onChange={(e)=> setType(e.target.value as "Consultation"|"Vacination")}>
             <option value="Consultation">Consultation</option>
             <option value="Vacination">Vacination</option>
           </select>
+          <label htmlFor="vet">With</label>
           <select name="vet" id="vet" value={vet} onChange={(e)=> setVet(e.target.value as "anika" |"danika"| "john")}>
-              <option value="anika">Anika Perry</option>
-              <option value="danika">Danica Jane</option>
+              <option value="anika">Danica Jane</option>
+              <option value="danika">Anika Perry</option>
               <option value="john">John Fins</option>
           </select>
         </div>   

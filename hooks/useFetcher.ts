@@ -169,7 +169,6 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
     avatarFile,
     petFile, 
     petUrl, 
-    sePet,
-    storageID
+    sePet 
   }
 }

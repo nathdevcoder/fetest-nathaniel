@@ -2,11 +2,15 @@ import  { useState } from 'react'
 
 type ValidFileType = {val: null | File, notvalid: boolean, msg: string}
 type URLFileType = string | null
-type SetFileType = (newValue: File | null) => void
-export default function useFileInput(initial:string | null): [ValidFileType, URLFileType, SetFileType] {
+type SetFileType = (e: React.ChangeEvent<HTMLInputElement>) => void 
+type ResetType = (url: string) => void
+export default function useFileInput(initial:string | null): [ValidFileType, URLFileType, SetFileType, ResetType] {
     const  [file, setFile] = useState<ValidFileType>({val: null, notvalid: true, msg: 'input a valid 1 mb image'})
     const [url, setUrl] = useState<URLFileType>(initial)
-    function SetFile(newValue: File | null) {
+    function SetFile(e: React.ChangeEvent<HTMLInputElement>) {
+        let newValue = null
+        if (e.target.files) newValue = e.target.files[0] 
+        
         if(!newValue) return
         const valids = ['image/png', 'image/jpg', 'image/jpeg']
         if(newValue.size > 1000000) {
@@ -20,5 +24,9 @@ export default function useFileInput(initial:string | null): [ValidFileType, URL
             setUrl(null)
         }
     }
-  return [file, url ,SetFile]
+ 
+    function  reset(url: string) {
+        setUrl(url)
+    }
+  return [file, url ,SetFile, reset]
 }

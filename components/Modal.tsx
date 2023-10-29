@@ -6,7 +6,8 @@ import TextInput from './snippets/TextInput'
 import dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import CardDetail from './snippets/CardDetail'
-import CardHeader from './snippets/CardHeader'
+import CardHeader from './snippets/CardHeader' 
+import FileInput from './snippets/FileInput'
 
 type modalType = {
   open: boolean,
@@ -62,7 +63,13 @@ export default function Modal(props: modalType) {
       setEnd,
       reset,
       type,
-      setType
+      setType,
+      setAvatar,
+      avatarUrl,
+      avatarFile, 
+      petFile, 
+      petUrl, 
+      sePet
     } = useFetcher(appiontment) 
     
     async function onSubmitHandler() {
@@ -89,7 +96,7 @@ export default function Modal(props: modalType) {
             onError: ()=>setOpen(false)
           })  
         }
-    }
+    } 
 
   return (
     <div className={open? style.ModalActive : style.Modal} onClick={(e)=>{
@@ -99,7 +106,8 @@ export default function Modal(props: modalType) {
       <div className={style.ModalContent}>
           <h5>{today}</h5>  
           <hr />
-          <TextInput inputVal={owner} SetVal={setOwner} label='Your Name' />
+          <TextInput inputVal={owner} SetVal={setOwner} label='YourName' />
+          <FileInput inputVal={avatarFile} SetVal={setAvatar} label='Avatar' Url={avatarUrl}/>
           <hr />
           <h6>CONTACT INFORMATION</h6>
           <TextInput inputVal={email} SetVal={setEmail} label='Email' />
@@ -107,6 +115,7 @@ export default function Modal(props: modalType) {
           <TextInput inputVal={address} SetVal={setAddress} label='Address' /> 
           <hr />
           <h6>PET DETAILS</h6> 
+          <FileInput inputVal={petFile} SetVal={sePet} label='Pet Image' Url={petUrl}/>
           <TextInput inputVal={name} SetVal={setName} label='Pet Name' />
           <TextInput inputVal={age} SetVal={setAge} label='Pet Age' />
           <TextInput inputVal={breed} SetVal={setBreed} label='Pet Breed' /> 
@@ -138,7 +147,7 @@ export default function Modal(props: modalType) {
           </select>
         </div>   
         <div className={style.Detail}>
-          <CardHeader title={vetDetail.building} subtitle={vetDetail.veterinary_name} avatar='https://randomuser.me/api/portraits/men/1.jpg' />
+          <CardHeader title={vetDetail.building} subtitle={vetDetail.veterinary_name} avatar={vetDetail.image} />
           <CardDetail email={vetDetail.veterinary_name} address={vetDetail.address} phone={vetDetail.contact_number} /> 
         </div>
         <hr />

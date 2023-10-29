@@ -1,0 +1,38 @@
+@use '../../styles/mixins' as mx;
+@use '../../styles/variables' as vr;
+
+.FileInput { 
+    width: 100%;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    &Wrapper {
+        @include mx.Row(flex-start, flex-start); 
+        margin: 20px;
+        column-gap: 40px; 
+    }
+    &Fields {
+        @include mx.Col(flex-start, flex-start); 
+        width: 100%; 
+        & p {
+            font-size: 12px;
+            line-height: 18px;
+        } 
+        & label {
+            margin-bottom: 8px;
+        }
+    }
+    &Images {
+        width: 100px;
+        & img {
+            border-radius: 100px;
+            overflow: hidden;
+        }
+    }
+    &Error {
+        @extend .FileInput;
+        background: pink;
+        border: 1px solid  vr.$error;
+    }
+}

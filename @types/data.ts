@@ -37,6 +37,9 @@ type appointmentRespondType = {
     pet: 'Dog' | 'Cat'
     phone: string
     start: string
+    avatar?: string
+    petimage?: string
+    media?: string
     type: "Consultation" | "Vacination"
     vet: 'anika' | 'danika' | 'john' 
     vetDetail: {

@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react'
 import useTextInput from './snippets/useTextInput'
 import Vets from '@/data/veterinary'
 import { reFormatTime } from '@/utils/Keeper'
+import useFileInput from './snippets/useFileInput'
 
 export default function useFetcher(appointment: singleAppointmentType | null) {
     const [start, setStart] = useState('00:00')
     const [end, setEnd] = useState('23:00')
+    const [avatarFile, avatarUrl, setAvatar, resetAvatar] = useFileInput(null)
+    const [petFile, petUrl, sePet, resePet] = useFileInput(null)
     const [breed, setBreed, resetbreed] = useTextInput('pet breed field is required')
     const [age, setAge, resetage] = useTextInput('pet age field is required')
     const [name, setName, resetname] = useTextInput('pet name field is required')
@@ -37,6 +40,8 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
             setType(appointment.type)
             setPet(appointment.pet)
             setVet(appointment.vet)
+            if(appointment.avatar) resetAvatar(appointment.avatar)
+            if(appointment.petimage) resePet(appointment.petimage)
         }
     },[])
 
@@ -143,6 +148,12 @@ export default function useFetcher(appointment: singleAppointmentType | null) {
     setEnd,
     type,
     setType,
-    reset
+    reset,
+    setAvatar,
+    avatarUrl,
+    avatarFile,
+    petFile, 
+    petUrl, 
+    sePet,
   }
 }
